@@ -7,15 +7,18 @@ namespace CarcassonneSolver
 {
     class Tile
     {
+        public int ID { get; set; }
         public int Left { get; set; }
         public int Right { get; set; }
         public int Top { get; set; }
         public int Bottom { get; set; }
         private int rotation;
 
-        public Tile(int l, int r, int t, int b)
+        public Position Pos { get; set; }
+
+        public Tile(int l, int r, int t, int b, int id)
         {
-            Left = l; Right = r; Top = t; Bottom = b; rotation = 0;
+            Left = l; Right = r; Top = t; Bottom = b; ID = id; rotation = 0; Pos = null;
         }
 
         public void Rotate()
@@ -31,12 +34,37 @@ namespace CarcassonneSolver
 
         public String Print()
         {
-            return "Left:"+Left.ToString()+
+            return "ID:"+ID.ToString()+
+                " Left:"+Left.ToString()+
                 " Right:"+Right.ToString()+
                 " Top:"+Top.ToString()+
                 " Bottom:"+Bottom.ToString()+
                 " Rotation:"+rotation.ToString();
         }
 
+        public bool Match(int l, int r, int t, int b)
+        {
+            if (((l != 0 && l == Left) || l == 0) &&
+                ((t != 0 && t == Top) || t == 0) &&
+                ((r != 0 && r == Right) || r == 0) && 
+                ((b != 0 && b == Bottom) || b == 0))
+                return true;
+            if (((l != 0 && l == Bottom) || l == 0) &&
+                ((t != 0 && t == Left) || t == 0) &&
+                ((r != 0 && r == Top) || r == 0) &&
+                ((b != 0 && b == Right) || b == 0))
+                return true;
+            if (((l != 0 && l == Right) || l == 0) &&
+                ((t != 0 && t == Bottom) || t == 0) &&
+                ((r != 0 && r == Left) || r == 0) &&
+                ((b != 0 && b == Top) || b == 0))
+                return true;
+            if (((l != 0 && l == Top) || l == 0) &&
+                ((t != 0 && t == Right) || t == 0) &&
+                ((r != 0 && r == Bottom) || r == 0) &&
+                ((b != 0 && b == Left) || b == 0))
+                return true;
+            return false;
+        }
     }
 }

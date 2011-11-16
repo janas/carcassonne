@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+  <tile left="city" right="city" top="city" bottom="city"></tile>
+</tiles>

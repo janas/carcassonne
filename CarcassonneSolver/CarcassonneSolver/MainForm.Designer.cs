@@ -28,34 +28,287 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.XMLbutton = new System.Windows.Forms.Button();
+            this.algorithmGroupBox = new System.Windows.Forms.GroupBox();
+            this.RosinskiRadioButton = new System.Windows.Forms.RadioButton();
+            this.JanaszekRadioButton = new System.Windows.Forms.RadioButton();
+            this.AccurateRadioButton = new System.Windows.Forms.RadioButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.algorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accurateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rosińskiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.janaszekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tilesLoadedGroupBox = new System.Windows.Forms.GroupBox();
+            this.tilesLoadedPictureBox = new System.Windows.Forms.PictureBox();
+            this.availableTilesPictureBox = new System.Windows.Forms.PictureBox();
+            this.availableTilesLabel = new System.Windows.Forms.Label();
+            this.visualizationGroupBox = new System.Windows.Forms.GroupBox();
+            this.fixedTilesPictureBox = new System.Windows.Forms.PictureBox();
+            this.fixedTilesLabel = new System.Windows.Forms.Label();
+            this.executionGroupBox = new System.Windows.Forms.GroupBox();
+            this.goButton = new System.Windows.Forms.Button();
+            this.goLabel = new System.Windows.Forms.Label();
+            this.algorithmGroupBox.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.tilesLoadedGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tilesLoadedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.availableTilesPictureBox)).BeginInit();
+            this.visualizationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fixedTilesPictureBox)).BeginInit();
+            this.executionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // XMLbutton
+            // algorithmGroupBox
             // 
-            this.XMLbutton.Location = new System.Drawing.Point(12, 12);
-            this.XMLbutton.Name = "XMLbutton";
-            this.XMLbutton.Size = new System.Drawing.Size(75, 23);
-            this.XMLbutton.TabIndex = 0;
-            this.XMLbutton.Text = "Load XML";
-            this.XMLbutton.UseVisualStyleBackColor = true;
-            this.XMLbutton.Click += new System.EventHandler(this.XMLbutton_Click);
+            this.algorithmGroupBox.Controls.Add(this.RosinskiRadioButton);
+            this.algorithmGroupBox.Controls.Add(this.JanaszekRadioButton);
+            this.algorithmGroupBox.Controls.Add(this.AccurateRadioButton);
+            this.algorithmGroupBox.Location = new System.Drawing.Point(160, 27);
+            this.algorithmGroupBox.Name = "algorithmGroupBox";
+            this.algorithmGroupBox.Size = new System.Drawing.Size(237, 42);
+            this.algorithmGroupBox.TabIndex = 1;
+            this.algorithmGroupBox.TabStop = false;
+            this.algorithmGroupBox.Text = "Algorithm selection";
+            // 
+            // RosinskiRadioButton
+            // 
+            this.RosinskiRadioButton.AutoSize = true;
+            this.RosinskiRadioButton.Location = new System.Drawing.Point(80, 19);
+            this.RosinskiRadioButton.Name = "RosinskiRadioButton";
+            this.RosinskiRadioButton.Size = new System.Drawing.Size(72, 17);
+            this.RosinskiRadioButton.TabIndex = 1;
+            this.RosinskiRadioButton.TabStop = true;
+            this.RosinskiRadioButton.Text = "Rosiński\'s";
+            this.RosinskiRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // JanaszekRadioButton
+            // 
+            this.JanaszekRadioButton.AutoSize = true;
+            this.JanaszekRadioButton.Location = new System.Drawing.Point(158, 19);
+            this.JanaszekRadioButton.Name = "JanaszekRadioButton";
+            this.JanaszekRadioButton.Size = new System.Drawing.Size(77, 17);
+            this.JanaszekRadioButton.TabIndex = 2;
+            this.JanaszekRadioButton.TabStop = true;
+            this.JanaszekRadioButton.Text = "Janaszek\'s";
+            this.JanaszekRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // AccurateRadioButton
+            // 
+            this.AccurateRadioButton.AutoSize = true;
+            this.AccurateRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.AccurateRadioButton.Name = "AccurateRadioButton";
+            this.AccurateRadioButton.Size = new System.Drawing.Size(68, 17);
+            this.AccurateRadioButton.TabIndex = 0;
+            this.AccurateRadioButton.TabStop = true;
+            this.AccurateRadioButton.Text = "Accurate";
+            this.AccurateRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.algorithmToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadXMLToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // loadXMLToolStripMenuItem
+            // 
+            this.loadXMLToolStripMenuItem.Name = "loadXMLToolStripMenuItem";
+            this.loadXMLToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.loadXMLToolStripMenuItem.Text = "Load XML";
+            this.loadXMLToolStripMenuItem.Click += new System.EventHandler(this.loadXMLToolStripMenuItem_Click);
+            // 
+            // algorithmToolStripMenuItem
+            // 
+            this.algorithmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accurateToolStripMenuItem,
+            this.rosińskiToolStripMenuItem,
+            this.janaszekToolStripMenuItem});
+            this.algorithmToolStripMenuItem.Name = "algorithmToolStripMenuItem";
+            this.algorithmToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.algorithmToolStripMenuItem.Text = "Algorithm";
+            // 
+            // accurateToolStripMenuItem
+            // 
+            this.accurateToolStripMenuItem.Name = "accurateToolStripMenuItem";
+            this.accurateToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.accurateToolStripMenuItem.Text = "Accurate";
+            // 
+            // rosińskiToolStripMenuItem
+            // 
+            this.rosińskiToolStripMenuItem.Name = "rosińskiToolStripMenuItem";
+            this.rosińskiToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.rosińskiToolStripMenuItem.Text = "Rosiński\'s";
+            // 
+            // janaszekToolStripMenuItem
+            // 
+            this.janaszekToolStripMenuItem.Name = "janaszekToolStripMenuItem";
+            this.janaszekToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.janaszekToolStripMenuItem.Text = "Janaszek\'s";
+            // 
+            // tilesLoadedGroupBox
+            // 
+            this.tilesLoadedGroupBox.Controls.Add(this.tilesLoadedPictureBox);
+            this.tilesLoadedGroupBox.Location = new System.Drawing.Point(13, 27);
+            this.tilesLoadedGroupBox.Name = "tilesLoadedGroupBox";
+            this.tilesLoadedGroupBox.Size = new System.Drawing.Size(82, 42);
+            this.tilesLoadedGroupBox.TabIndex = 3;
+            this.tilesLoadedGroupBox.TabStop = false;
+            this.tilesLoadedGroupBox.Text = "Tiles loaded";
+            // 
+            // tilesLoadedPictureBox
+            // 
+            this.tilesLoadedPictureBox.BackColor = System.Drawing.Color.Red;
+            this.tilesLoadedPictureBox.Location = new System.Drawing.Point(7, 18);
+            this.tilesLoadedPictureBox.Name = "tilesLoadedPictureBox";
+            this.tilesLoadedPictureBox.Size = new System.Drawing.Size(63, 17);
+            this.tilesLoadedPictureBox.TabIndex = 0;
+            this.tilesLoadedPictureBox.TabStop = false;
+            // 
+            // availableTilesPictureBox
+            // 
+            this.availableTilesPictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.availableTilesPictureBox.Location = new System.Drawing.Point(9, 32);
+            this.availableTilesPictureBox.Name = "availableTilesPictureBox";
+            this.availableTilesPictureBox.Size = new System.Drawing.Size(450, 430);
+            this.availableTilesPictureBox.TabIndex = 4;
+            this.availableTilesPictureBox.TabStop = false;
+            // 
+            // availableTilesLabel
+            // 
+            this.availableTilesLabel.AutoSize = true;
+            this.availableTilesLabel.Location = new System.Drawing.Point(388, 16);
+            this.availableTilesLabel.Name = "availableTilesLabel";
+            this.availableTilesLabel.Size = new System.Drawing.Size(71, 13);
+            this.availableTilesLabel.TabIndex = 5;
+            this.availableTilesLabel.Text = "Available tiles";
+            // 
+            // visualizationGroupBox
+            // 
+            this.visualizationGroupBox.Controls.Add(this.fixedTilesLabel);
+            this.visualizationGroupBox.Controls.Add(this.fixedTilesPictureBox);
+            this.visualizationGroupBox.Controls.Add(this.availableTilesLabel);
+            this.visualizationGroupBox.Controls.Add(this.availableTilesPictureBox);
+            this.visualizationGroupBox.Location = new System.Drawing.Point(13, 75);
+            this.visualizationGroupBox.Name = "visualizationGroupBox";
+            this.visualizationGroupBox.Size = new System.Drawing.Size(959, 475);
+            this.visualizationGroupBox.TabIndex = 6;
+            this.visualizationGroupBox.TabStop = false;
+            this.visualizationGroupBox.Text = "Visualization";
+            // 
+            // fixedTilesPictureBox
+            // 
+            this.fixedTilesPictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.fixedTilesPictureBox.Location = new System.Drawing.Point(503, 32);
+            this.fixedTilesPictureBox.Name = "fixedTilesPictureBox";
+            this.fixedTilesPictureBox.Size = new System.Drawing.Size(450, 430);
+            this.fixedTilesPictureBox.TabIndex = 6;
+            this.fixedTilesPictureBox.TabStop = false;
+            // 
+            // fixedTilesLabel
+            // 
+            this.fixedTilesLabel.AutoSize = true;
+            this.fixedTilesLabel.Location = new System.Drawing.Point(500, 16);
+            this.fixedTilesLabel.Name = "fixedTilesLabel";
+            this.fixedTilesLabel.Size = new System.Drawing.Size(53, 13);
+            this.fixedTilesLabel.TabIndex = 7;
+            this.fixedTilesLabel.Text = "Fixed tiles";
+            // 
+            // executionGroupBox
+            // 
+            this.executionGroupBox.Controls.Add(this.goLabel);
+            this.executionGroupBox.Controls.Add(this.goButton);
+            this.executionGroupBox.Location = new System.Drawing.Point(459, 28);
+            this.executionGroupBox.Name = "executionGroupBox";
+            this.executionGroupBox.Size = new System.Drawing.Size(68, 41);
+            this.executionGroupBox.TabIndex = 7;
+            this.executionGroupBox.TabStop = false;
+            this.executionGroupBox.Text = "Execution";
+            // 
+            // goButton
+            // 
+            this.goButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.goButton.Location = new System.Drawing.Point(38, 17);
+            this.goButton.Name = "goButton";
+            this.goButton.Size = new System.Drawing.Size(18, 17);
+            this.goButton.TabIndex = 0;
+            this.goButton.UseVisualStyleBackColor = false;
+            this.goButton.Click += new System.EventHandler(this.goButton_Click);
+            // 
+            // goLabel
+            // 
+            this.goLabel.AutoSize = true;
+            this.goLabel.Location = new System.Drawing.Point(6, 20);
+            this.goLabel.Name = "goLabel";
+            this.goLabel.Size = new System.Drawing.Size(26, 13);
+            this.goLabel.TabIndex = 8;
+            this.goLabel.Text = "GO!";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.XMLbutton);
+            this.ClientSize = new System.Drawing.Size(984, 562);
+            this.Controls.Add(this.executionGroupBox);
+            this.Controls.Add(this.visualizationGroupBox);
+            this.Controls.Add(this.tilesLoadedGroupBox);
+            this.Controls.Add(this.algorithmGroupBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Carcassonne Solver";
+            this.algorithmGroupBox.ResumeLayout(false);
+            this.algorithmGroupBox.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.tilesLoadedGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tilesLoadedPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.availableTilesPictureBox)).EndInit();
+            this.visualizationGroupBox.ResumeLayout(false);
+            this.visualizationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fixedTilesPictureBox)).EndInit();
+            this.executionGroupBox.ResumeLayout(false);
+            this.executionGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button XMLbutton;
+        private System.Windows.Forms.GroupBox algorithmGroupBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadXMLToolStripMenuItem;
+        private System.Windows.Forms.RadioButton JanaszekRadioButton;
+        private System.Windows.Forms.RadioButton RosinskiRadioButton;
+        private System.Windows.Forms.RadioButton AccurateRadioButton;
+        private System.Windows.Forms.ToolStripMenuItem algorithmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accurateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rosińskiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem janaszekToolStripMenuItem;
+        private System.Windows.Forms.GroupBox tilesLoadedGroupBox;
+        private System.Windows.Forms.PictureBox tilesLoadedPictureBox;
+        private System.Windows.Forms.PictureBox availableTilesPictureBox;
+        private System.Windows.Forms.Label availableTilesLabel;
+        private System.Windows.Forms.GroupBox visualizationGroupBox;
+        private System.Windows.Forms.PictureBox fixedTilesPictureBox;
+        private System.Windows.Forms.Label fixedTilesLabel;
+        private System.Windows.Forms.GroupBox executionGroupBox;
+        private System.Windows.Forms.Label goLabel;
+        private System.Windows.Forms.Button goButton;
     }
 }
 
