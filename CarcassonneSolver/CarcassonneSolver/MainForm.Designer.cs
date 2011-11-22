@@ -44,11 +44,14 @@
             this.availableTilesPictureBox = new System.Windows.Forms.PictureBox();
             this.availableTilesLabel = new System.Windows.Forms.Label();
             this.visualizationGroupBox = new System.Windows.Forms.GroupBox();
-            this.fixedTilesPictureBox = new System.Windows.Forms.PictureBox();
             this.fixedTilesLabel = new System.Windows.Forms.Label();
+            this.fixedTilesPictureBox = new System.Windows.Forms.PictureBox();
             this.executionGroupBox = new System.Windows.Forms.GroupBox();
-            this.goButton = new System.Windows.Forms.Button();
             this.goLabel = new System.Windows.Forms.Label();
+            this.goButton = new System.Windows.Forms.Button();
+            this.sleepGroupBox = new System.Windows.Forms.GroupBox();
+            this.sleepUpDown = new System.Windows.Forms.NumericUpDown();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.algorithmGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tilesLoadedGroupBox.SuspendLayout();
@@ -57,6 +60,8 @@
             this.visualizationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fixedTilesPictureBox)).BeginInit();
             this.executionGroupBox.SuspendLayout();
+            this.sleepGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sleepUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // algorithmGroupBox
@@ -179,7 +184,7 @@
             // 
             // availableTilesPictureBox
             // 
-            this.availableTilesPictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.availableTilesPictureBox.BackColor = System.Drawing.Color.DarkGray;
             this.availableTilesPictureBox.Location = new System.Drawing.Point(9, 32);
             this.availableTilesPictureBox.Name = "availableTilesPictureBox";
             this.availableTilesPictureBox.Size = new System.Drawing.Size(450, 430);
@@ -208,15 +213,6 @@
             this.visualizationGroupBox.TabStop = false;
             this.visualizationGroupBox.Text = "Visualization";
             // 
-            // fixedTilesPictureBox
-            // 
-            this.fixedTilesPictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.fixedTilesPictureBox.Location = new System.Drawing.Point(503, 32);
-            this.fixedTilesPictureBox.Name = "fixedTilesPictureBox";
-            this.fixedTilesPictureBox.Size = new System.Drawing.Size(450, 430);
-            this.fixedTilesPictureBox.TabIndex = 6;
-            this.fixedTilesPictureBox.TabStop = false;
-            // 
             // fixedTilesLabel
             // 
             this.fixedTilesLabel.AutoSize = true;
@@ -225,6 +221,15 @@
             this.fixedTilesLabel.Size = new System.Drawing.Size(53, 13);
             this.fixedTilesLabel.TabIndex = 7;
             this.fixedTilesLabel.Text = "Fixed tiles";
+            // 
+            // fixedTilesPictureBox
+            // 
+            this.fixedTilesPictureBox.BackColor = System.Drawing.Color.DarkGray;
+            this.fixedTilesPictureBox.Location = new System.Drawing.Point(503, 32);
+            this.fixedTilesPictureBox.Name = "fixedTilesPictureBox";
+            this.fixedTilesPictureBox.Size = new System.Drawing.Size(450, 430);
+            this.fixedTilesPictureBox.TabIndex = 6;
+            this.fixedTilesPictureBox.TabStop = false;
             // 
             // executionGroupBox
             // 
@@ -237,6 +242,15 @@
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
             // 
+            // goLabel
+            // 
+            this.goLabel.AutoSize = true;
+            this.goLabel.Location = new System.Drawing.Point(6, 20);
+            this.goLabel.Name = "goLabel";
+            this.goLabel.Size = new System.Drawing.Size(26, 13);
+            this.goLabel.TabIndex = 8;
+            this.goLabel.Text = "GO!";
+            // 
             // goButton
             // 
             this.goButton.BackColor = System.Drawing.Color.SteelBlue;
@@ -247,20 +261,56 @@
             this.goButton.UseVisualStyleBackColor = false;
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
             // 
-            // goLabel
+            // sleepGroupBox
             // 
-            this.goLabel.AutoSize = true;
-            this.goLabel.Location = new System.Drawing.Point(6, 20);
-            this.goLabel.Name = "goLabel";
-            this.goLabel.Size = new System.Drawing.Size(26, 13);
-            this.goLabel.TabIndex = 8;
-            this.goLabel.Text = "GO!";
+            this.sleepGroupBox.Controls.Add(this.sleepUpDown);
+            this.sleepGroupBox.Location = new System.Drawing.Point(572, 28);
+            this.sleepGroupBox.Name = "sleepGroupBox";
+            this.sleepGroupBox.Size = new System.Drawing.Size(71, 41);
+            this.sleepGroupBox.TabIndex = 8;
+            this.sleepGroupBox.TabStop = false;
+            this.sleepGroupBox.Text = "Sleep";
+            // 
+            // sleepUpDown
+            // 
+            this.sleepUpDown.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.sleepUpDown.Location = new System.Drawing.Point(6, 15);
+            this.sleepUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.sleepUpDown.Name = "sleepUpDown";
+            this.sleepUpDown.Size = new System.Drawing.Size(57, 20);
+            this.sleepUpDown.TabIndex = 0;
+            this.sleepUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.sleepUpDown.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(777, 43);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 20);
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.sleepGroupBox);
             this.Controls.Add(this.executionGroupBox);
             this.Controls.Add(this.visualizationGroupBox);
             this.Controls.Add(this.tilesLoadedGroupBox);
@@ -281,6 +331,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fixedTilesPictureBox)).EndInit();
             this.executionGroupBox.ResumeLayout(false);
             this.executionGroupBox.PerformLayout();
+            this.sleepGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sleepUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +361,9 @@
         private System.Windows.Forms.GroupBox executionGroupBox;
         private System.Windows.Forms.Label goLabel;
         private System.Windows.Forms.Button goButton;
+        private System.Windows.Forms.GroupBox sleepGroupBox;
+        private System.Windows.Forms.NumericUpDown sleepUpDown;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
 

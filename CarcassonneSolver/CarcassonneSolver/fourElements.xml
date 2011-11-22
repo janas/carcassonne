@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+  <tile left="city" right="road" top="city" bottom="road"></tile>
+  <tile left="road" right="field" top="city" bottom="city"></tile>
+  <tile left="field" right="city" top="field" bottom="city"></tile>
+  <tile left="field" right="field" top="city" bottom="road"></tile>
+</tiles>
