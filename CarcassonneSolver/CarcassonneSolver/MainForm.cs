@@ -18,8 +18,7 @@ namespace CarcassonneSolver
         List<Tile> availableTiles;
         List<Tile> fixedTiles;
         int bestPossibleScore = 0;
-        int fixedMinX = Int32.MaxValue;
-        int fixedMinY = Int32.MaxValue;
+        int currentScore = 0;
         Thread thread;
 
         public MainForm()
@@ -100,49 +99,199 @@ namespace CarcassonneSolver
                 return 3;
             return 0;
         }
-
-        private void verifyMins(Position pos)
+        
+        /// <summary>Checks whether list contains specific tile.</summary>
+        /// <param name="x">X-position of tile.</param>
+        /// <param name="y">Y-position of tile.</param>
+        private bool fixedListContainsElement(int x, int y)
         {
-            if (pos.X < fixedMinX)
-                fixedMinX = pos.X;
-            if (pos.Y < fixedMinY)
-                fixedMinY = pos.Y;
+            foreach (Tile t in fixedTiles)
+                if (t.Pos.X == x && t.Pos.Y == y)
+                    return true;
+            return false;
+        }
+
+        /// <summary>Checks whether list contains square of tiles.</summary>
+        /// <param name="x">X-position of left-top-most tile.</param>
+        /// <param name="y">Y-position of left-top-most tile.</param>
+        /// <param name="edge">Length of square edge.</param>
+        private bool fixedListContainsSquare(int x, int y, int edge)
+        {
+            for (int i = x; i < edge; i++)
+                for (int j = y; j < edge; j++)
+                    if (!fixedListContainsElement(i, j))
+                        return false;
+            return true;
+        }
+
+        private void getNeighboursTypes(ref int left, ref int right, ref int top, ref int bottom, int x, int y)
+        {
+            foreach (Tile t in fixedTiles)
+            {
+                if (t.Pos.X == x - 1 && t.Pos.Y == y)
+                    left = t.Right;
+                if (t.Pos.X == x + 1 && t.Pos.Y == y)
+                    right = t.Left;
+                if (t.Pos.X == x && t.Pos.Y == y + 1)
+                    bottom = t.Top;
+                if (t.Pos.X == x && t.Pos.Y == y - 1)
+                    top = t.Bottom;
+            }
+        }
+
+        private int verifyScore(List<Tile> F)
+        {
+            if (F.Count == 0)
+                return 0;
+            int result = 1;
+            /*
+            foreach (Tile t in F)
+            {
+                while (true)
+                {
+                    if (fixedListContainsSquare(t.Pos.X, t.Pos.Y, result+1))
+                        result++;
+                    else
+                        break;
+                }
+            }
+            */ 
+            while (true)
+            {
+                if (fixedListContainsSquare(0, 0, result+1))
+                    result++;
+                else
+                    break;
+            }
+            //MessageBox.Show(result.ToString());
+            return result;
         }
 
         #region Algorithms
-        private void accurateAlgorithm()
+        private void rosinskiAlgorithm()
         {
+            // Initializing necessary variables
+            int score1 = 0;
             List<Tile> A1 = new List<Tile>(availableTiles);
             List<Tile> F1 = new List<Tile>(fixedTiles);
+            // Going into first level - put one tile
             for (int i = 0; i < A1.Count; i++)
             {
+                // Set of necessary variables on every level
+                int score2 = score1;
                 List<Tile> A2 = new List<Tile>(A1);
                 List<Tile> F2 = new List<Tile>(F1);
+                // Operations on tiles
                 Tile t2 = A2.ElementAt(i);
                 A2.RemoveAt(i);
                 t2.Pos = new Position(0, 0);
                 F2.Add(t2);
-                verifyMins(t2.Pos);
-                drawTiles(A2, F2);
-                Thread.Sleep((int)sleepUpDown.Value);
-                for (int j = 0; j < A2.Count; j++)
+                score2 = verifyScore(F2);
+                // Drawing pictures
+                if (sleepUpDown.Value > 0)
                 {
+                    drawTiles(A2, F2);
+                    Thread.Sleep((int)sleepUpDown.Value);
+                }
+                // Next level
+                /*while (true)
+                {
+                    // Set of necessary variables on every level
+                    int score3 = score2;
                     List<Tile> A3 = new List<Tile>(A2);
                     List<Tile> F3 = new List<Tile>(F2);
+                    // Operations on tiles
                     Tile t3 = A3.ElementAt(j);
                     A3.RemoveAt(j);
                     t3.Pos = new Position(1, 0);
                     F3.Add(t3);
-                    verifyMins(t3.Pos);
-                    drawTiles(A3, F3);
-                    Thread.Sleep((int)sleepUpDown.Value);
-                }
+                    score3 = verifyScore(F3);
+                    // Drawing pictures
+                    if (sleepUpDown.Value > 0)
+                    {
+                        drawTiles(A3, F3);
+                        Thread.Sleep((int)sleepUpDown.Value);
+                    }
+                }*/
             }
             thread.Abort();
         }
 
-        private void rosinskiAlgorithm()
+        private List<Position> accurateGetPositions()
         {
+            List<Position> result = new List<Position>();
+            for (int i = 0; i < currentScore + 1; i++)
+            {
+                for (int j = 0; j < currentScore + 1; j++)
+                {
+                    if (!fixedListContainsElement(i, j))
+                        result.Add(new Position(i, j));
+                }
+            }
+            if (result.Count == 0)
+                result.Add(new Position(0, 0));
+            return result;
+        }
+
+        private void accurateLevelDeeper()
+        {
+            // Check if it is the end
+            if (availableTiles.Count == 0)
+                return;
+            List<Position> positions = accurateGetPositions();
+            foreach (Position p in positions)
+            {
+                for (int j = 0; j < availableTiles.Count; j++)
+                {
+                    // Matching
+                    int left = 0, right = 0, top = 0, bottom = 0, rotation;
+                    getNeighboursTypes(ref left, ref right, ref top, ref bottom, p.X, p.Y);
+                    if ((rotation = availableTiles.ElementAt(j).Match(left, right, top, bottom)) > -1)
+                    {
+                        // Moving one tile from A to F
+                        Tile t = availableTiles.ElementAt(j);
+                        availableTiles.RemoveAt(j);
+                        t.Pos = new Position(p.X, p.Y);
+                        t.Rotate(rotation);
+                        fixedTiles.Add(t);
+
+                        // Drawing pictures
+                        if (sleepUpDown.Value > 0)
+                        {
+                            drawTiles(availableTiles, fixedTiles);
+                            Thread.Sleep((int)sleepUpDown.Value);
+                        }
+
+                        // Check if we need to look further
+                        currentScore = verifyScore(fixedTiles);
+                        //if (currentScore == bestPossibleScore)
+
+                        // Next level
+                        accurateLevelDeeper();
+
+                        // Moving tile back from F to A
+                        fixedTiles.Remove(t);
+                        //t.Pos = null;
+                        t.Rotate(4 - rotation);
+                        availableTiles.Insert(j, t);
+                        currentScore = verifyScore(fixedTiles);
+
+                        // Drawing pictures
+                        if (sleepUpDown.Value > 0)
+                        {
+                            drawTiles(availableTiles, fixedTiles);
+                            Thread.Sleep((int)sleepUpDown.Value / 5);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void accurateAlgorithm()
+        {
+            accurateLevelDeeper();
+            thread.Abort();
+            MessageBox.Show("We're done here!");
         }
 
         private void janaszekAlgorithm()
@@ -254,6 +403,17 @@ namespace CarcassonneSolver
             //g.Dispose();
         }
 
+        private Position findMinPosition(List<Tile> F)
+        {
+            Position result = new Position(Int32.MaxValue, Int32.MaxValue);
+            foreach (Tile t in F)
+            {
+                result.X = Math.Min(t.Pos.X, result.X);
+                result.Y = Math.Min(t.Pos.Y, result.Y);
+            }
+            return result;
+        }
+
         private void drawFixedTiles(List<Tile> F)
         {
             int boxEdge = Math.Min(fixedTilesPictureBox.Width,
@@ -267,8 +427,9 @@ namespace CarcassonneSolver
             {
                 if (t.Pos == null)
                     continue;
-                int refX = t.Pos.X - fixedMinX;
-                int refY = t.Pos.Y - fixedMinY;
+                Position min = findMinPosition(F);
+                int refX = t.Pos.X - min.X;
+                int refY = t.Pos.Y - min.Y;
                 brush.Color = Color.Green;
                 g.FillRectangle(brush, refX * tileEdge, refY * tileEdge,
                     tileEdge, tileEdge);
@@ -354,15 +515,17 @@ namespace CarcassonneSolver
             short algorithm = getAlgorithm();
             switch (algorithm)
             {
-                case 1: 
+                case 1:
                     thread = new Thread(new ThreadStart(accurateAlgorithm));
                     thread.Start();
                     break;
-                case 2: 
+                case 2:
                     thread = new Thread(new ThreadStart(rosinskiAlgorithm));
+                    thread.Start();
                     break;
-                case 3: 
+                case 3:
                     thread = new Thread(new ThreadStart(janaszekAlgorithm));
+                    thread.Start();
                     break;
                 default: 
                     MessageBox.Show("Error:\nAlgorithm selection.");
@@ -372,7 +535,8 @@ namespace CarcassonneSolver
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            thread.Abort();
+            if (thread != null)
+                thread.Abort();
         }
     }
 }

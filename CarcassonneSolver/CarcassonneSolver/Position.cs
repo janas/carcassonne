@@ -15,5 +15,11 @@ namespace CarcassonneSolver
             X = x; 
             Y = y;
         }
+
+        public Position(Position p)
+        {
+            this.X = p.X;
+            this.Y = p.Y;
+        }
     }
 }

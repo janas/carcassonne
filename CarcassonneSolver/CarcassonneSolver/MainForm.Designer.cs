@@ -52,6 +52,8 @@
             this.sleepGroupBox = new System.Windows.Forms.GroupBox();
             this.sleepUpDown = new System.Windows.Forms.NumericUpDown();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.scoreGroupBox = new System.Windows.Forms.GroupBox();
+            this.scoreLabel = new System.Windows.Forms.Label();
             this.algorithmGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tilesLoadedGroupBox.SuspendLayout();
@@ -62,6 +64,7 @@
             this.executionGroupBox.SuspendLayout();
             this.sleepGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sleepUpDown)).BeginInit();
+            this.scoreGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // algorithmGroupBox
@@ -233,11 +236,12 @@
             // 
             // executionGroupBox
             // 
+            this.executionGroupBox.Controls.Add(this.cancelButton);
             this.executionGroupBox.Controls.Add(this.goLabel);
             this.executionGroupBox.Controls.Add(this.goButton);
             this.executionGroupBox.Location = new System.Drawing.Point(459, 28);
             this.executionGroupBox.Name = "executionGroupBox";
-            this.executionGroupBox.Size = new System.Drawing.Size(68, 41);
+            this.executionGroupBox.Size = new System.Drawing.Size(152, 41);
             this.executionGroupBox.TabIndex = 7;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
@@ -247,24 +251,26 @@
             this.goLabel.AutoSize = true;
             this.goLabel.Location = new System.Drawing.Point(6, 20);
             this.goLabel.Name = "goLabel";
-            this.goLabel.Size = new System.Drawing.Size(26, 13);
+            this.goLabel.Size = new System.Drawing.Size(0, 13);
             this.goLabel.TabIndex = 8;
-            this.goLabel.Text = "GO!";
             // 
             // goButton
             // 
             this.goButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.goButton.Location = new System.Drawing.Point(38, 17);
+            this.goButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.goButton.ForeColor = System.Drawing.Color.White;
+            this.goButton.Location = new System.Drawing.Point(6, 14);
             this.goButton.Name = "goButton";
-            this.goButton.Size = new System.Drawing.Size(18, 17);
+            this.goButton.Size = new System.Drawing.Size(67, 20);
             this.goButton.TabIndex = 0;
+            this.goButton.Text = "Start";
             this.goButton.UseVisualStyleBackColor = false;
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
             // 
             // sleepGroupBox
             // 
             this.sleepGroupBox.Controls.Add(this.sleepUpDown);
-            this.sleepGroupBox.Location = new System.Drawing.Point(572, 28);
+            this.sleepGroupBox.Location = new System.Drawing.Point(666, 28);
             this.sleepGroupBox.Name = "sleepGroupBox";
             this.sleepGroupBox.Size = new System.Drawing.Size(71, 41);
             this.sleepGroupBox.TabIndex = 8;
@@ -296,20 +302,39 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(777, 43);
+            this.cancelButton.Location = new System.Drawing.Point(79, 14);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 20);
+            this.cancelButton.Size = new System.Drawing.Size(67, 20);
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // scoreGroupBox
+            // 
+            this.scoreGroupBox.Controls.Add(this.scoreLabel);
+            this.scoreGroupBox.Location = new System.Drawing.Point(920, 28);
+            this.scoreGroupBox.Name = "scoreGroupBox";
+            this.scoreGroupBox.Size = new System.Drawing.Size(51, 41);
+            this.scoreGroupBox.TabIndex = 9;
+            this.scoreGroupBox.TabStop = false;
+            this.scoreGroupBox.Text = "Score";
+            // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Location = new System.Drawing.Point(6, 20);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(13, 13);
+            this.scoreLabel.TabIndex = 0;
+            this.scoreLabel.Text = "0";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
-            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.scoreGroupBox);
             this.Controls.Add(this.sleepGroupBox);
             this.Controls.Add(this.executionGroupBox);
             this.Controls.Add(this.visualizationGroupBox);
@@ -333,6 +358,8 @@
             this.executionGroupBox.PerformLayout();
             this.sleepGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sleepUpDown)).EndInit();
+            this.scoreGroupBox.ResumeLayout(false);
+            this.scoreGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,6 +391,8 @@
         private System.Windows.Forms.GroupBox sleepGroupBox;
         private System.Windows.Forms.NumericUpDown sleepUpDown;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.GroupBox scoreGroupBox;
+        private System.Windows.Forms.Label scoreLabel;
     }
 }
 
