@@ -47,13 +47,14 @@
             this.fixedTilesLabel = new System.Windows.Forms.Label();
             this.fixedTilesPictureBox = new System.Windows.Forms.PictureBox();
             this.executionGroupBox = new System.Windows.Forms.GroupBox();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.goLabel = new System.Windows.Forms.Label();
             this.goButton = new System.Windows.Forms.Button();
             this.sleepGroupBox = new System.Windows.Forms.GroupBox();
             this.sleepUpDown = new System.Windows.Forms.NumericUpDown();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.scoreGroupBox = new System.Windows.Forms.GroupBox();
             this.scoreLabel = new System.Windows.Forms.Label();
+            this.executionProgressBar = new System.Windows.Forms.ProgressBar();
             this.algorithmGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tilesLoadedGroupBox.SuspendLayout();
@@ -241,10 +242,20 @@
             this.executionGroupBox.Controls.Add(this.goButton);
             this.executionGroupBox.Location = new System.Drawing.Point(459, 28);
             this.executionGroupBox.Name = "executionGroupBox";
-            this.executionGroupBox.Size = new System.Drawing.Size(152, 41);
+            this.executionGroupBox.Size = new System.Drawing.Size(267, 41);
             this.executionGroupBox.TabIndex = 7;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(79, 14);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(67, 20);
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // goLabel
             // 
@@ -270,7 +281,7 @@
             // sleepGroupBox
             // 
             this.sleepGroupBox.Controls.Add(this.sleepUpDown);
-            this.sleepGroupBox.Location = new System.Drawing.Point(666, 28);
+            this.sleepGroupBox.Location = new System.Drawing.Point(785, 28);
             this.sleepGroupBox.Name = "sleepGroupBox";
             this.sleepGroupBox.Size = new System.Drawing.Size(71, 41);
             this.sleepGroupBox.TabIndex = 8;
@@ -294,21 +305,6 @@
             this.sleepUpDown.Size = new System.Drawing.Size(57, 20);
             this.sleepUpDown.TabIndex = 0;
             this.sleepUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.sleepUpDown.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(79, 14);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(67, 20);
-            this.cancelButton.TabIndex = 9;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // scoreGroupBox
             // 
@@ -329,11 +325,21 @@
             this.scoreLabel.TabIndex = 0;
             this.scoreLabel.Text = "0";
             // 
+            // executionProgressBar
+            // 
+            this.executionProgressBar.Enabled = false;
+            this.executionProgressBar.Location = new System.Drawing.Point(617, 40);
+            this.executionProgressBar.Name = "executionProgressBar";
+            this.executionProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.executionProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.executionProgressBar.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
+            this.Controls.Add(this.executionProgressBar);
             this.Controls.Add(this.scoreGroupBox);
             this.Controls.Add(this.sleepGroupBox);
             this.Controls.Add(this.executionGroupBox);
@@ -393,6 +399,7 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.GroupBox scoreGroupBox;
         private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.ProgressBar executionProgressBar;
     }
 }
 

@@ -11,19 +11,45 @@ using System.Xml.Linq;
 
 namespace CarcassonneSolver
 {
+    enum TT { field = 1, city, road };
+
     public partial class MainForm : Form
     {
         bool fileLoaded = false;
-        enum TT { field = 1, city, road };
         List<Tile> availableTiles;
         List<Tile> fixedTiles;
         int bestPossibleScore = 0;
         int currentScore = 0;
         Thread thread;
+        DateTime startTime;
+        DateTime stopTime;
 
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void threadStart()
+        {
+            thread.Start();
+            executionProgressBar.Style = ProgressBarStyle.Marquee;
+            executionProgressBar.MarqueeAnimationSpeed = 30;
+            startTime = DateTime.Now;
+        }
+
+        private void threadStop()
+        {
+            stopTime = DateTime.Now;
+            StopProgressBar(executionProgressBar);
+            TimeSpan executionTime = stopTime - startTime;
+            String performanceInfo = "Execution time:\n" +
+                    executionTime.Days.ToString() + " d " +
+                    executionTime.Hours.ToString() + " h " +
+                    executionTime.Minutes.ToString() + " m " +
+                    executionTime.Seconds.ToString() + " s " +
+                    executionTime.Milliseconds.ToString() + " ms";
+            MessageBox.Show(performanceInfo);
+            thread.Abort();
         }
 
         private int ConvertXmlToInt(string input)
@@ -167,56 +193,13 @@ namespace CarcassonneSolver
             return result;
         }
 
-        #region Algorithms
-        private void rosinskiAlgorithm()
+        private void stopExecution(List<Tile> A, List<Tile> F)
         {
-            // Initializing necessary variables
-            int score1 = 0;
-            List<Tile> A1 = new List<Tile>(availableTiles);
-            List<Tile> F1 = new List<Tile>(fixedTiles);
-            // Going into first level - put one tile
-            for (int i = 0; i < A1.Count; i++)
-            {
-                // Set of necessary variables on every level
-                int score2 = score1;
-                List<Tile> A2 = new List<Tile>(A1);
-                List<Tile> F2 = new List<Tile>(F1);
-                // Operations on tiles
-                Tile t2 = A2.ElementAt(i);
-                A2.RemoveAt(i);
-                t2.Pos = new Position(0, 0);
-                F2.Add(t2);
-                score2 = verifyScore(F2);
-                // Drawing pictures
-                if (sleepUpDown.Value > 0)
-                {
-                    drawTiles(A2, F2);
-                    Thread.Sleep((int)sleepUpDown.Value);
-                }
-                // Next level
-                /*while (true)
-                {
-                    // Set of necessary variables on every level
-                    int score3 = score2;
-                    List<Tile> A3 = new List<Tile>(A2);
-                    List<Tile> F3 = new List<Tile>(F2);
-                    // Operations on tiles
-                    Tile t3 = A3.ElementAt(j);
-                    A3.RemoveAt(j);
-                    t3.Pos = new Position(1, 0);
-                    F3.Add(t3);
-                    score3 = verifyScore(F3);
-                    // Drawing pictures
-                    if (sleepUpDown.Value > 0)
-                    {
-                        drawTiles(A3, F3);
-                        Thread.Sleep((int)sleepUpDown.Value);
-                    }
-                }*/
-            }
-            thread.Abort();
+            drawTiles(A, F);
+            threadStop();
         }
 
+        #region Algorithms
         private List<Position> accurateGetPositions()
         {
             List<Position> result = new List<Position>();
@@ -241,61 +224,86 @@ namespace CarcassonneSolver
             List<Position> positions = accurateGetPositions();
             foreach (Position p in positions)
             {
+                bool positionUsed = false;
                 for (int j = 0; j < availableTiles.Count; j++)
                 {
                     // Matching
-                    int left = 0, right = 0, top = 0, bottom = 0, rotation;
+                    int left = 0, right = 0, top = 0, bottom = 0;
+                    List<int> rotations;
                     getNeighboursTypes(ref left, ref right, ref top, ref bottom, p.X, p.Y);
-                    if ((rotation = availableTiles.ElementAt(j).Match(left, right, top, bottom)) > -1)
+                    if ((rotations = availableTiles.ElementAt(j).Match(left, right, top, bottom)).Count > 0)
                     {
-                        // Moving one tile from A to F
-                        Tile t = availableTiles.ElementAt(j);
-                        availableTiles.RemoveAt(j);
-                        t.Pos = new Position(p.X, p.Y);
-                        t.Rotate(rotation);
-                        fixedTiles.Add(t);
-
-                        // Drawing pictures
-                        if (sleepUpDown.Value > 0)
+                        positionUsed = true;
+                        foreach (int rotation in rotations)
                         {
-                            drawTiles(availableTiles, fixedTiles);
-                            Thread.Sleep((int)sleepUpDown.Value);
-                        }
+                            // Moving one tile from A to F
+                            Tile t = availableTiles.ElementAt(j);
+                            availableTiles.RemoveAt(j);
+                            t.Pos = new Position(p.X, p.Y);
 
-                        // Check if we need to look further
-                        currentScore = verifyScore(fixedTiles);
-                        //if (currentScore == bestPossibleScore)
+                            t.Rotate(rotation);
+                            fixedTiles.Add(t);
 
-                        // Next level
-                        accurateLevelDeeper();
+                            // Drawing pictures
+                            if (sleepUpDown.Value > 0)
+                            {
+                                drawTiles(availableTiles, fixedTiles);
+                                Thread.Sleep((int)sleepUpDown.Value);
+                            }
 
-                        // Moving tile back from F to A
-                        fixedTiles.Remove(t);
-                        //t.Pos = null;
-                        t.Rotate(4 - rotation);
-                        availableTiles.Insert(j, t);
-                        currentScore = verifyScore(fixedTiles);
+                            // Check if we need to look further
+                            currentScore = verifyScore(fixedTiles);
+                            if (currentScore == bestPossibleScore)
+                                stopExecution(availableTiles, fixedTiles);
 
-                        // Drawing pictures
-                        if (sleepUpDown.Value > 0)
-                        {
-                            drawTiles(availableTiles, fixedTiles);
-                            Thread.Sleep((int)sleepUpDown.Value / 5);
+                            // Next level
+                            accurateLevelDeeper();
+
+                            // Moving tile back from F to A
+                            fixedTiles.Remove(t);
+                            //t.Pos = null;
+                            t.Rotate(4 - rotation);
+                            availableTiles.Insert(j, t);
+                            currentScore = verifyScore(fixedTiles);
+
+                            // Drawing pictures
+                            if (sleepUpDown.Value > 0)
+                            {
+                                drawTiles(availableTiles, fixedTiles);
+                                Thread.Sleep((int)sleepUpDown.Value / 5);
+                            }
                         }
                     }
                 }
+                if (!positionUsed)
+                    return;
             }
         }
 
         private void accurateAlgorithm()
         {
             accurateLevelDeeper();
-            thread.Abort();
-            MessageBox.Show("We're done here!");
+            threadStop();
+        }
+        
+        private void rosinskiAlgorithm()
+        {
+            TileCityComparer tc = new TileCityComparer();
+            availableTiles.Sort(tc);
+            accurateLevelDeeper();
+            threadStop();
+        }
+
+        private void createBigTiles()
+        {
+            List<Tile> bigTiles = new List<Tile>();
+            
         }
 
         private void janaszekAlgorithm()
         {
+            createBigTiles();
+            threadStop();
         }
         #endregion
 
@@ -517,15 +525,15 @@ namespace CarcassonneSolver
             {
                 case 1:
                     thread = new Thread(new ThreadStart(accurateAlgorithm));
-                    thread.Start();
+                    threadStart();
                     break;
                 case 2:
                     thread = new Thread(new ThreadStart(rosinskiAlgorithm));
-                    thread.Start();
+                    threadStart();
                     break;
                 case 3:
                     thread = new Thread(new ThreadStart(janaszekAlgorithm));
-                    thread.Start();
+                    threadStart();
                     break;
                 default: 
                     MessageBox.Show("Error:\nAlgorithm selection.");
@@ -536,7 +544,34 @@ namespace CarcassonneSolver
         private void cancelButton_Click(object sender, EventArgs e)
         {
             if (thread != null)
-                thread.Abort();
+                threadStop();
+        }
+
+        public class TileCityComparer : IComparer<Tile>
+        {
+            public int Compare(Tile t1, Tile t2)
+            {
+                int t1cities = t1.Cities();
+                int t2cities = t2.Cities();
+                if (t1cities == t2cities)
+                    return 0;
+                else
+                    return t1cities - t2cities; 
+            }
+        }
+
+        delegate void CallProgressBarStop(ProgressBar myProgressBar);
+        private void StopProgressBar(ProgressBar myProgressBar)
+        {
+            if (myProgressBar.InvokeRequired)
+            {
+                CallProgressBarStop del = StopProgressBar;
+                myProgressBar.Invoke(del, new object[] { myProgressBar });
+                return;
+            }
+
+            myProgressBar.Style = ProgressBarStyle.Continuous;
+            myProgressBar.MarqueeAnimationSpeed = 0;
         }
     }
 }
