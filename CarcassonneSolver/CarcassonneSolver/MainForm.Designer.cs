@@ -55,6 +55,9 @@
             this.scoreGroupBox = new System.Windows.Forms.GroupBox();
             this.scoreLabel = new System.Windows.Forms.Label();
             this.executionProgressBar = new System.Windows.Forms.ProgressBar();
+            this.testingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.availableTileClassesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.performanceLabel = new System.Windows.Forms.Label();
             this.algorithmGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tilesLoadedGroupBox.SuspendLayout();
@@ -73,7 +76,7 @@
             this.algorithmGroupBox.Controls.Add(this.RosinskiRadioButton);
             this.algorithmGroupBox.Controls.Add(this.JanaszekRadioButton);
             this.algorithmGroupBox.Controls.Add(this.AccurateRadioButton);
-            this.algorithmGroupBox.Location = new System.Drawing.Point(160, 27);
+            this.algorithmGroupBox.Location = new System.Drawing.Point(101, 27);
             this.algorithmGroupBox.Name = "algorithmGroupBox";
             this.algorithmGroupBox.Size = new System.Drawing.Size(237, 42);
             this.algorithmGroupBox.TabIndex = 1;
@@ -117,7 +120,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.algorithmToolStripMenuItem});
+            this.algorithmToolStripMenuItem,
+            this.testingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
@@ -237,12 +241,14 @@
             // 
             // executionGroupBox
             // 
+            this.executionGroupBox.Controls.Add(this.performanceLabel);
+            this.executionGroupBox.Controls.Add(this.executionProgressBar);
             this.executionGroupBox.Controls.Add(this.cancelButton);
             this.executionGroupBox.Controls.Add(this.goLabel);
             this.executionGroupBox.Controls.Add(this.goButton);
-            this.executionGroupBox.Location = new System.Drawing.Point(459, 28);
+            this.executionGroupBox.Location = new System.Drawing.Point(342, 28);
             this.executionGroupBox.Name = "executionGroupBox";
-            this.executionGroupBox.Size = new System.Drawing.Size(267, 41);
+            this.executionGroupBox.Size = new System.Drawing.Size(443, 41);
             this.executionGroupBox.TabIndex = 7;
             this.executionGroupBox.TabStop = false;
             this.executionGroupBox.Text = "Execution";
@@ -281,7 +287,7 @@
             // sleepGroupBox
             // 
             this.sleepGroupBox.Controls.Add(this.sleepUpDown);
-            this.sleepGroupBox.Location = new System.Drawing.Point(785, 28);
+            this.sleepGroupBox.Location = new System.Drawing.Point(901, 28);
             this.sleepGroupBox.Name = "sleepGroupBox";
             this.sleepGroupBox.Size = new System.Drawing.Size(71, 41);
             this.sleepGroupBox.TabIndex = 8;
@@ -309,9 +315,9 @@
             // scoreGroupBox
             // 
             this.scoreGroupBox.Controls.Add(this.scoreLabel);
-            this.scoreGroupBox.Location = new System.Drawing.Point(920, 28);
+            this.scoreGroupBox.Location = new System.Drawing.Point(840, 28);
             this.scoreGroupBox.Name = "scoreGroupBox";
-            this.scoreGroupBox.Size = new System.Drawing.Size(51, 41);
+            this.scoreGroupBox.Size = new System.Drawing.Size(55, 41);
             this.scoreGroupBox.TabIndex = 9;
             this.scoreGroupBox.TabStop = false;
             this.scoreGroupBox.Text = "Score";
@@ -328,18 +334,40 @@
             // executionProgressBar
             // 
             this.executionProgressBar.Enabled = false;
-            this.executionProgressBar.Location = new System.Drawing.Point(617, 40);
+            this.executionProgressBar.Location = new System.Drawing.Point(152, 12);
             this.executionProgressBar.Name = "executionProgressBar";
             this.executionProgressBar.Size = new System.Drawing.Size(100, 23);
             this.executionProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.executionProgressBar.TabIndex = 10;
+            // 
+            // testingToolStripMenuItem
+            // 
+            this.testingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.availableTileClassesToolStripMenuItem});
+            this.testingToolStripMenuItem.Name = "testingToolStripMenuItem";
+            this.testingToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.testingToolStripMenuItem.Text = "Testing";
+            // 
+            // availableTileClassesToolStripMenuItem
+            // 
+            this.availableTileClassesToolStripMenuItem.Name = "availableTileClassesToolStripMenuItem";
+            this.availableTileClassesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.availableTileClassesToolStripMenuItem.Text = "# available tile classes";
+            this.availableTileClassesToolStripMenuItem.Click += new System.EventHandler(this.availableTileClassesToolStripMenuItem_Click);
+            // 
+            // performanceLabel
+            // 
+            this.performanceLabel.AutoSize = true;
+            this.performanceLabel.Location = new System.Drawing.Point(258, 20);
+            this.performanceLabel.Name = "performanceLabel";
+            this.performanceLabel.Size = new System.Drawing.Size(0, 13);
+            this.performanceLabel.TabIndex = 11;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 562);
-            this.Controls.Add(this.executionProgressBar);
             this.Controls.Add(this.scoreGroupBox);
             this.Controls.Add(this.sleepGroupBox);
             this.Controls.Add(this.executionGroupBox);
@@ -400,6 +428,9 @@
         private System.Windows.Forms.GroupBox scoreGroupBox;
         private System.Windows.Forms.Label scoreLabel;
         private System.Windows.Forms.ProgressBar executionProgressBar;
+        private System.Windows.Forms.ToolStripMenuItem testingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem availableTileClassesToolStripMenuItem;
+        private System.Windows.Forms.Label performanceLabel;
     }
 }
 

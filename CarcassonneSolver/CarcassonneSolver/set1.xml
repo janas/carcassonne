@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+  <comment>cccc1</comment>
+  <tile left="city" top="city" right="city" bottom="city"></tile>
+  <comment>ccfc4</comment>
+  <tile left="city" top="city" right="field" bottom="city"></tile>
+  <tile left="city" top="city" right="field" bottom="city"></tile>
+  <tile left="city" top="city" right="field" bottom="city"></tile>
+  <tile left="city" top="city" right="field" bottom="city"></tile>
+  <comment>ccff2</comment>
+  <tile left="city" top="city" right="field" bottom="field"></tile>
+  <tile left="city" top="city" right="field" bottom="field"></tile>
+  <comment>ccrc3</comment>
+  <tile left="city" top="city" right="road" bottom="city"></tile>
+  <tile left="city" top="city" right="road" bottom="city"></tile>
+  <tile left="city" top="city" right="road" bottom="city"></tile>
+  <comment>cfcf3</comment>
+  <tile left="city" top="field" right="city" bottom="field"></tile>
+  <tile left="city" top="field" right="city" bottom="field"></tile>
+  <tile left="city" top="field" right="city" bottom="field"></tile>
+  <comment>cffc5</comment>
+  <tile left="city" top="field" right="field" bottom="city"></tile>
+  <tile left="city" top="field" right="field" bottom="city"></tile>
+  <tile left="city" top="field" right="field" bottom="city"></tile>
+  <tile left="city" top="field" right="field" bottom="city"></tile>
+  <tile left="city" top="field" right="field" bottom="city"></tile>
+  <comment>cfff5</comment>
+  <tile left="city" top="field" right="field" bottom="field"></tile>
+  <tile left="city" top="field" right="field" bottom="field"></tile>
+  <tile left="city" top="field" right="field" bottom="field"></tile>
+  <tile left="city" top="field" right="field" bottom="field"></tile>
+  <tile left="city" top="field" right="field" bottom="field"></tile>
+  <comment>cfrr3</comment>
+  <tile left="city" top="field" right="road" bottom="road"></tile>
+  <tile left="city" top="field" right="road" bottom="road"></tile>
+  <tile left="city" top="field" right="road" bottom="road"></tile>
+  <comment>crfr4</comment>
+  <tile left="city" top="road" right="field" bottom="road"></tile>
+  <tile left="city" top="road" right="field" bottom="road"></tile>
+  <tile left="city" top="road" right="field" bottom="road"></tile>
+  <tile left="city" top="road" right="field" bottom="road"></tile>
+  <comment>crrc5</comment>
+  <tile left="city" top="road" right="road" bottom="city"></tile>
+  <tile left="city" top="road" right="road" bottom="city"></tile>
+  <tile left="city" top="road" right="road" bottom="city"></tile>
+  <tile left="city" top="road" right="road" bottom="city"></tile>
+  <tile left="city" top="road" right="road" bottom="city"></tile>
+  <comment>crrf3</comment>
+  <tile left="city" top="road" right="road" bottom="field"></tile>
+  <tile left="city" top="road" right="road" bottom="field"></tile>
+  <tile left="city" top="road" right="road" bottom="field"></tile>
+  <comment>crrr3</comment>
+  <tile left="city" top="road" right="road" bottom="road"></tile>
+  <tile left="city" top="road" right="road" bottom="road"></tile>
+  <tile left="city" top="road" right="road" bottom="road"></tile>
+  <comment>fcfc3</comment>
+  <tile left="field" top="city" right="field" bottom="city"></tile>
+  <tile left="field" top="city" right="field" bottom="city"></tile>
+  <tile left="field" top="city" right="field" bottom="city"></tile>
+  <comment>ffff4</comment>
+  <tile left="field" top="field" right="field" bottom="field"></tile>
+  <tile left="field" top="field" right="field" bottom="field"></tile>
+  <tile left="field" top="field" right="field" bottom="field"></tile>
+  <tile left="field" top="field" right="field" bottom="field"></tile>
+  <comment>ffrf2</comment>
+  <tile left="field" top="field" right="road" bottom="field"></tile>
+  <tile left="field" top="field" right="road" bottom="field"></tile>
+  <comment>frrf9</comment>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <tile left="field" top="road" right="road" bottom="field"></tile>
+  <comment>frrr4</comment>
+  <tile left="field" top="road" right="road" bottom="road"></tile>
+  <tile left="field" top="road" right="road" bottom="road"></tile>
+  <tile left="field" top="road" right="road" bottom="road"></tile>
+  <tile left="field" top="road" right="road" bottom="road"></tile>
+  <comment>rfrf8</comment>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <tile left="road" top="field" right="road" bottom="field"></tile>
+  <comment>rrrr1</comment>
+  <tile left="road" top="road" right="road" bottom="road"></tile>
+</tiles>
